@@ -1,0 +1,13 @@
+{
+  "products": [],
+  "results": [
+    {
+      "id": 1,
+      "studentName": "Anvar",
+      "testType": "Listening",
+      "submittedAt": "21.03.2024",
+      "status": "pending",
+      "answers": {}
+    }
+  ]
+}

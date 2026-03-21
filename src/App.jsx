@@ -1,34 +1,22 @@
-import { Route, Routes } from 'react-router-dom';
-import Home from "./pages/home/Home";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './App.css';
-import './style/StyleComponent'; // Fayl yo'lini tekshirib ol
-import Header from './components/header/Header';
-import { Button } from './style/StyleComponent';
-import { Title } from './style/StyleComponent';
-
+import { Routes, Route } from 'react-router-dom';
+import { ResultProvider } from './provider/Provider';
+import Login from "./pages/login/Login";
+import LogoutS from "./pages/logoutStudent/LogoutS";
+import LogoutT from "./pages/logoutTeacher/LogoutT";
+// import Home from "./pages/logoutStudent/sections/Sectiom";
 
 function App() {
-
   return (
-    <div className="App">
-      <ToastContainer />
-      <Header />
-      <Title>is title tag</Title>
-      
-      <Button>enter</Button>
-
-     
-
-      {/* ? router */}
-      <Routes>
-        {/* Odatda asosiy sahifa uchun path='/' bo'ladi */}
-        <Route path='/' element={<Home />} />
-        <Route path='home' element={<Home />} />
-      </Routes>
-    </div>
+    <ResultProvider> {/* Provider barcha Route-larni o'rab turibdi */}
+      <div className="App">
+        <Routes>
+          <Route path='/' element={<Login />} />
+          {/* <Route path="/home" element={<Home />} /> */}
+          <Route path='/student/*' element={<LogoutS />} />
+          <Route path='/teacher/*' element={<LogoutT />} />
+        </Routes>
+      </div>
+    </ResultProvider>
   );
 }
-
 export default App;
