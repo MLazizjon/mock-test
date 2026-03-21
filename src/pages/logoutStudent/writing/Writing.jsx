@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import * as S from './wrting.styles';
 import {  FiInfo, FiType } from 'react-icons/fi';
 
 const Writing = () => {
-  // const navigate = useNavigate();
   const [activeTask, setActiveTask] = useState(1);
   const [answers, setAnswers] = useState({ task1: "", task2: "" });
   const [timeLeft, setTimeLeft] = useState(3600); // 60 daqiqa
