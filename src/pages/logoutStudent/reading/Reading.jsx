@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './reading.styles';
-import { FiCheck, FiFlag } from 'react-icons/fi';
+// import { FiCheck, FiFlag } from 'react-icons/fi';
 // import ListeningHeader from '../../../components/header/Header'; 
 
 const Reading = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [activePart, setActivePart] = useState(1);
   const [answers, setAnswers] = useState({});
 

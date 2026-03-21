@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'; // 1. useCallback qo'shildi
 import { useNavigate } from 'react-router-dom';
 import { FiClock } from 'react-icons/fi';
 import { useResults } from '../../provider/Provider';
@@ -8,10 +8,31 @@ const ListeningHeader = ({ answers, testType = "Listening" }) => {
   const navigate = useNavigate();
   const { addResult } = useResults();
   
-  // Reading bo'lsa 60 minut (3600s), Listening bo'lsa 30 minut (1800s)
   const initialSeconds = testType === "Reading" ? 3600 : 1800;
   const [seconds, setSeconds] = useState(initialSeconds);
 
+  // 2. Funksiyani useCallback ichiga olamiz, shunda u har renderda qayta yaratilmaydi
+  const handleFinalSubmit = useCallback((isAuto = false) => {
+    const confirmText = isAuto 
+      ? "Vaqt tugadi! Test avtomatik topshiriladi." 
+      : `${testType} testini yakunlab, natijalarni saqlashni xohlaysizmi?`;
+
+    if (isAuto || window.confirm(confirmText)) {
+      const resultData = {
+        id: Date.now(),
+        studentName: "Anvar Narzullayev",
+        testType: testType,
+        submittedAt: new Date().toLocaleString(),
+        answers: answers,
+        status: "completed"
+      };
+
+      addResult(resultData);
+      navigate('/teacher/result');
+    }
+  }, [answers, testType, addResult, navigate]); // Bog'liqliklar (dependencies)
+
+  // 3. useEffect endi handleFinalSubmit-ni taniydi va xato bermaydi
   useEffect(() => {
     if (seconds <= 0) {
       handleFinalSubmit(true);
@@ -22,27 +43,7 @@ const ListeningHeader = ({ answers, testType = "Listening" }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [seconds]);
-
-  const handleFinalSubmit = (isAuto = false) => {
-    const confirmText = isAuto 
-      ? "Vaqt tugadi! Test avtomatik topshiriladi." 
-      : `${testType} testini yakunlab, natijalarni saqlashni xohlaysizmi?`;
-
-    if (isAuto || window.confirm(confirmText)) {
-      const resultData = {
-        id: Date.now(),
-        studentName: "Anvar Narzullayev",
-        testType: testType, // Natija aynan shu nom bilan saqlanadi
-        submittedAt: new Date().toLocaleString(),
-        answers: answers,
-        status: "completed"
-      };
-
-      addResult(resultData);
-      navigate('/teacher/result');
-    }
-  };
+  }, [seconds, handleFinalSubmit]); // handleFinalSubmit bu yerga qo'shildi
 
   const formatTime = (totalSeconds) => {
     const minutes = Math.floor(totalSeconds / 60);

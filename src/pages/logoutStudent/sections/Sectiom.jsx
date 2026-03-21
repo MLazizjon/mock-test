@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './section.styles';
-import { FaHeadphones, FaBookOpen, FaPenNib, FaMicrophone } from 'react-icons/fa';
+import { FaHeadphones, FaBookOpen, FaPenNib} from 'react-icons/fa';
 
 const sections = [
   { id: 1, title: 'Listening', path: 'listening', info: '4 parts • 40 questions • 30 minutes', icon: <FaHeadphones />, bgColor: '#eff6ff', iconColor: '#2563eb' },

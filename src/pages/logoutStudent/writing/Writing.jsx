@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './wrting.styles';
-import { FiClock, FiCheck, FiInfo, FiType } from 'react-icons/fi';
+import {  FiInfo, FiType } from 'react-icons/fi';
 
 const Writing = () => {
   const navigate = useNavigate();
@@ -16,11 +16,11 @@ const Writing = () => {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  };
+  // const formatTime = (seconds) => {
+  //   const mins = Math.floor(seconds / 60);
+  //   const secs = seconds % 60;
+  //   return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  // };
 
   const tasks = {
     1: {
@@ -50,11 +50,11 @@ const Writing = () => {
     return str.trim() === "" ? 0 : str.trim().split(/\s+/).length;
   };
 
-  const handleSubmit = () => {
-    if (window.confirm("Writing testini yakunlab, natijalarni yubormoqchimisiz?")) {
-      navigate('/student/results', { state: { writingAnswers: answers } });
-    }
-  };
+  // const handleSubmit = () => {
+  //   if (window.confirm("Writing testini yakunlab, natijalarni yubormoqchimisiz?")) {
+  //     navigate('/student/results', { state: { writingAnswers: answers } });
+  //   }
+  // };
 
   return (
     <S.PageWrapper>
