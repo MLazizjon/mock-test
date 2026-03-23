@@ -20,12 +20,21 @@ export const TopBar = styled.header`
   border-bottom: 2px solid #e2e8f0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    padding: 0 15px;
+    height: 55px;
+  }
 `;
 
 export const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+
+  @media (max-width: 500px) {
+    gap: 8px;
+  }
 `;
 
 export const LogoText = styled.h1`
@@ -34,6 +43,10 @@ export const LogoText = styled.h1`
   color: #2b5a9e;
   margin: 0;
   cursor: pointer;
+
+  @media (max-width: 500px) {
+    font-size: 18px;
+  }
 `;
 
 export const Divider = styled.div`
@@ -46,12 +59,20 @@ export const TestTitle = styled.span`
   font-size: 16px;
   font-weight: 600;
   color: #475569;
+
+  @media (max-width: 500px) {
+    font-size: 13px;
+  }
 `;
 
 export const HeaderRight = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
+  @media (max-width: 500px) {
+    gap: 10px;
+  }
 `;
 
 export const TimerBox = styled.div`
@@ -67,6 +88,11 @@ export const TimerBox = styled.div`
   font-size: 17px;
   font-family: monospace;
 
+  @media (max-width: 500px) {
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+
   svg {
     color: #2b5a9e;
   }
@@ -81,18 +107,22 @@ export const SubmitBtn = styled.button`
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s;
+
+  @media (max-width: 500px) {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
 
   &:hover {
     background-color: #1d4ed8;
   }
 `;
 
-/* --- MAIN CONTENT STYLES --- */
+/* --- MAIN CONTENT --- */
 export const MainContainer = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 100px; 
+  padding-bottom: 100px;
 `;
 
 export const HeaderSection = styled.div`
@@ -102,6 +132,16 @@ export const HeaderSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  @media (max-width: 500px) {
+    padding: 20px 15px;
+  }
 `;
 
 export const TitleBlock = styled.div`
@@ -110,52 +150,71 @@ export const TitleBlock = styled.div`
   gap: 5px;
 `;
 
-export const MainTitle = styled.h2` 
-  font-size: 20px; 
-  margin: 0; 
-  color: #1e293b;
-`;
-
-export const SubTitle = styled.h3` 
-  font-size: 16px; 
-  color: #64748b; 
+export const MainTitle = styled.h2`
+  font-size: 20px;
   margin: 0;
+  color: #1e293b;
+
+  @media (max-width: 500px) {
+    font-size: 17px;
+  }
 `;
 
-export const Instruction = styled.p` 
-  color: #d35400; 
-  font-weight: bold; 
-  font-style: italic; 
-  font-size: 13px; 
+export const SubTitle = styled.h3`
+  font-size: 16px;
+  color: #64748b;
+  margin: 0;
+
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
+`;
+
+export const Instruction = styled.p`
+  color: #d35400;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 13px;
   margin: 5px 0 0 0;
+
+  @media (max-width: 500px) {
+    font-size: 12px;
+  }
 `;
 
-export const AudioBox = styled.div` 
-  display: flex; 
+export const AudioBox = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 8px; 
+  gap: 8px;
+
+  @media (max-width: 900px) {
+    align-items: flex-start;
+    width: 100%;
+  }
 `;
 
 export const PlayBtn = styled.button`
   background: ${props => props.active ? '#ef4444' : '#2563eb'};
-  color: white; 
-  border: none; 
-  padding: 10px 22px; 
-  border-radius: 6px; 
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
   cursor: pointer;
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 600;
-  transition: opacity 0.2s;
 
-  &:hover { opacity: 0.9; }
+  @media (max-width: 500px) {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
 `;
 
-export const InfoText = styled.span` 
-  font-size: 11px; 
-  color: #94a3b8; 
+export const InfoText = styled.span`
+  font-size: 11px;
+  color: #94a3b8;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -167,73 +226,90 @@ export const QuestionsContainer = styled.div`
   background: white;
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 25px;
+  }
+
+  @media (max-width: 500px) {
+    padding: 15px;
+    margin: 20px 10px;
+  }
 `;
 
-export const QuestionRow = styled.div` 
-  display: flex; 
-  gap: 20px; 
-  margin-bottom: 30px; 
+export const QuestionRow = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
-export const QNum = styled.div` 
-  min-width: 32px; 
-  height: 32px; 
-  border: 1.5px solid #1e293b; 
+export const QNum = styled.div`
+  min-width: 32px;
+  height: 32px;
+  border: 1.5px solid #1e293b;
   border-radius: 4px;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 800;
   background: #f8fafc;
 `;
 
-export const QText = styled.div` 
-  flex: 1; 
-  font-size: 16px; 
-  line-height: 1.8; 
+export const QText = styled.div`
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.8;
   color: #334155;
-`;
 
-export const Input = styled.input` 
-  border: none; 
-  border-bottom: 2px solid #cbd5e1; 
-  padding: 2px 8px; 
-  width: 160px; 
-  margin: 0 5px; 
-  outline: none;
-  font-weight: 600;
-  color: #2563eb;
-  transition: border-color 0.2s;
-
-  &:focus { 
-    border-bottom: 2px solid #2563eb; 
-    background: #f1f5f9; 
+  @media (max-width: 500px) {
+    font-size: 14px;
   }
 `;
 
-export const Options = styled.div` 
-  display: flex; 
-  flex-direction: column; 
-  gap: 12px; 
-  margin-top: 15px; 
+export const Input = styled.input`
+  border: none;
+  border-bottom: 2px solid #cbd5e1;
+  padding: 2px 8px;
+  width: 160px;
+  margin: 0 5px;
+  outline: none;
+  font-weight: 600;
+  color: #2563eb;
+
+  @media (max-width: 500px) {
+    width: 120px;
+  }
+
+  &:focus {
+    border-bottom: 2px solid #2563eb;
+    background: #f1f5f9;
+  }
 `;
 
-export const OptionLabel = styled.label` 
-  display: flex; 
-  align-items: center; 
-  gap: 12px; 
-  cursor: pointer; 
+export const Options = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+`;
+
+export const OptionLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
   padding: 8px 12px;
   border-radius: 6px;
-  transition: background 0.2s;
 
   &:hover { background: #f1f5f9; }
-  
-  input { cursor: pointer; }
 `;
 
-/* --- FOOTER STYLES --- */
+/* --- FOOTER --- */
 export const FixedFooter = styled.footer`
   position: fixed;
   bottom: 0;
@@ -245,12 +321,22 @@ export const FixedFooter = styled.footer`
   align-items: center;
   padding: 0 30px;
   z-index: 100;
+
+  @media (max-width: 500px) {
+    height: auto;
+    padding: 10px;
+  }
 `;
 
 export const FooterNav = styled.div`
   display: flex;
   height: 100%;
   align-items: stretch;
+
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 `;
 
 export const PartTab = styled.div`
@@ -260,6 +346,11 @@ export const PartTab = styled.div`
   border-right: 1px solid #cbd5e1;
   background: ${props => props.active ? '#ffffff' : 'transparent'};
   cursor: pointer;
+
+  @media (max-width: 500px) {
+    padding: 10px;
+    border-right: none;
+  }
 
   .tab-main {
     display: flex;
@@ -276,6 +367,12 @@ export const QuestionStrip = styled.div`
   gap: 10px;
   margin-left: 25px;
   align-items: center;
+
+  @media (max-width: 500px) {
+    margin-left: 0;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
 `;
 
 export const NavSquare = styled.div`
@@ -285,6 +382,10 @@ export const NavSquare = styled.div`
   color: ${props => props.answered ? '#2563eb' : '#64748b'};
   border-bottom: 2px solid ${props => props.answered ? '#2563eb' : 'transparent'};
   padding: 2px 4px;
-  
+
+  @media (max-width: 500px) {
+    font-size: 11px;
+  }
+
   &:hover { color: #2563eb; }
 `;

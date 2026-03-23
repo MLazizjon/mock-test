@@ -8,6 +8,7 @@ export const PageWrapper = styled.div`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 `;
 
+/* HEADER */
 export const Header = styled.header`
   height: 60px;
   background: #1e293b;
@@ -16,11 +17,23 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 0 25px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+  @media (max-width: 500px) {
+    padding: 0 15px;
+    height: 55px;
+  }
 `;
 
 export const HeaderLeft = styled.div``;
-export const LogoText = styled.h1` font-size: 18px; font-weight: 700; letter-spacing: 0.5px; `;
+
+export const LogoText = styled.h1`
+  font-size: 18px;
+  font-weight: 700;
+
+  @media (max-width: 500px) {
+    font-size: 15px;
+  }
+`;
 
 export const TimerBox = styled.div`
   background: ${props => props.critical ? '#ef4444' : '#334155'};
@@ -31,11 +44,15 @@ export const TimerBox = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid ${props => props.critical ? '#f87171' : '#475569'};
-  transition: all 0.3s;
+
+  @media (max-width: 500px) {
+    font-size: 16px;
+    padding: 4px 10px;
+  }
 `;
 
 export const HeaderRight = styled.div``;
+
 export const FinishBtn = styled.button`
   background: #22c55e;
   color: white;
@@ -44,18 +61,24 @@ export const FinishBtn = styled.button`
   border-radius: 4px;
   font-weight: 700;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  &:hover { background: #16a34a; }
+
+  @media (max-width: 500px) {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
 `;
 
+/* MAIN */
 export const MainContainer = styled.div`
   flex: 1;
   display: flex;
   overflow: hidden;
   gap: 2px;
   background: #cbd5e1;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 export const QuestionPanel = styled.div`
@@ -70,6 +93,10 @@ export const TaskNav = styled.div`
   display: flex;
   background: #f8fafc;
   border-bottom: 1px solid #e2e8f0;
+
+  @media (max-width: 500px) {
+    justify-content: space-around;
+  }
 `;
 
 export const TaskTab = styled.button`
@@ -79,41 +106,60 @@ export const TaskTab = styled.button`
   color: ${props => props.active ? '#2563eb' : '#64748b'};
   font-weight: 700;
   cursor: pointer;
-  border-bottom: 3px solid ${props => props.active ? '#2563eb' : 'transparent'};
-  &:hover { color: #2563eb; }
+
+  @media (max-width: 500px) {
+    padding: 10px;
+    font-size: 13px;
+  }
 `;
 
-export const QuestionContent = styled.div` padding: 30px; `;
+export const QuestionContent = styled.div`
+  padding: 30px;
+
+  @media (max-width: 500px) {
+    padding: 20px;
+  }
+`;
 
 export const InstructionBox = styled.div`
   background: #eff6ff;
   padding: 12px 18px;
   border-radius: 6px;
-  color: #1e40af;
   font-size: 14px;
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
+
+  @media (max-width: 500px) {
+    font-size: 12px;
+    padding: 10px;
+  }
 `;
 
-export const QuestionTitle = styled.h2` font-size: 20px; color: #1e293b; margin-bottom: 15px; `;
+export const QuestionTitle = styled.h2`
+  font-size: 20px;
+
+  @media (max-width: 500px) {
+    font-size: 16px;
+  }
+`;
 
 export const QuestionText = styled.p`
   font-size: 16px;
   line-height: 1.7;
-  color: #334155;
-  margin-bottom: 25px;
-  white-space: pre-line;
+
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
 `;
 
 export const QuestionImage = styled.img`
   width: 100%;
   max-width: 500px;
-  border-radius: 4px;
-  border: 1px solid #e2e8f0;
 `;
 
+/* EDITOR */
 export const EditorPanel = styled.div`
   flex: 1;
   background: white;
@@ -128,18 +174,37 @@ export const EditorToolbar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 10px;
+  }
 `;
 
 export const StatItem = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #475569;
   font-size: 14px;
-  strong { color: #2563eb; font-size: 16px; }
+
+  @media (max-width: 500px) {
+    font-size: 12px;
+  }
+
+  strong {
+    font-size: 16px;
+  }
 `;
 
-export const TargetInfo = styled.span` font-size: 12px; color: #94a3b8; font-weight: 600; `;
+export const TargetInfo = styled.span`
+  font-size: 12px;
+
+  @media (max-width: 500px) {
+    font-size: 11px;
+  }
+`;
 
 export const TextArea = styled.textarea`
   flex: 1;
@@ -148,11 +213,14 @@ export const TextArea = styled.textarea`
   outline: none;
   font-size: 18px;
   line-height: 1.8;
-  resize: none;
-  color: #0f172a;
-  &::placeholder { color: #cbd5e1; }
+
+  @media (max-width: 500px) {
+    padding: 15px;
+    font-size: 15px;
+  }
 `;
 
+/* FOOTER */
 export const Footer = styled.footer`
   height: 40px;
   background: #f8fafc;
@@ -160,6 +228,17 @@ export const Footer = styled.footer`
   display: flex;
   align-items: center;
   padding: 0 25px;
+
+  @media (max-width: 500px) {
+    padding: 0 10px;
+    height: auto;
+  }
 `;
 
-export const Status = styled.span` font-size: 12px; color: #64748b; font-weight: 600; `;
+export const Status = styled.span`
+  font-size: 12px;
+
+  @media (max-width: 500px) {
+    font-size: 11px;
+  }
+`;

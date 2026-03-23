@@ -83,6 +83,16 @@ export const SubmitBtn = styled.button`
     background: #1d4ed8;
     transform: translateY(-1px);
     box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    padding: 10px 20px 30px;
+
+
+
+
+
+
+
+
+    
   }
 
   &:active {

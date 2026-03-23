@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './wrting.styles';
-import {  FiInfo, FiType } from 'react-icons/fi';
+import { FiInfo, FiType } from 'react-icons/fi';
 
 const Writing = () => {
   const [activeTask, setActiveTask] = useState(1);
@@ -13,12 +13,6 @@ const Writing = () => {
     const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
     return () => clearInterval(timer);
   }, [timeLeft]);
-
-  // const formatTime = (seconds) => {
-  //   const mins = Math.floor(seconds / 60);
-  //   const secs = seconds % 60;
-  //   return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  // };
 
   const tasks = {
     1: {
@@ -48,33 +42,11 @@ const Writing = () => {
     return str.trim() === "" ? 0 : str.trim().split(/\s+/).length;
   };
 
-  // const handleSubmit = () => {
-  //   if (window.confirm("Writing testini yakunlab, natijalarni yubormoqchimisiz?")) {
-  //     navigate('/student/results', { state: { writingAnswers: answers } });
-  //   }
-  // };
-
   return (
     <S.PageWrapper>
-      {/* HEADER SECTION */}
-      {/* <S.Header>
-        <S.HeaderLeft>
-          <S.LogoText>IELTS Academic Writing</S.LogoText>
-        </S.HeaderLeft>
-        
-        <S.TimerBox critical={timeLeft < 300}>
-          <FiClock /> <span>{formatTime(timeLeft)}</span>
-        </S.TimerBox>
-
-        <S.HeaderRight>
-          <S.FinishBtn onClick={handleSubmit}>
-            <FiCheck /> Finish Test
-          </S.FinishBtn>
-        </S.HeaderRight>
-      </S.Header> */}
-
       <S.MainContainer>
-        {/* LEFT PANEL: QUESTION */}
+
+        {/* LEFT PANEL */}
         <S.QuestionPanel>
           <S.TaskNav>
             <S.TaskTab active={activeTask === 1} onClick={() => setActiveTask(1)}>
@@ -90,17 +62,13 @@ const Writing = () => {
               <FiInfo size={18} />
               <span>{tasks[activeTask].instruction}</span>
             </S.InstructionBox>
-            
+
             <S.QuestionTitle>{tasks[activeTask].title}</S.QuestionTitle>
             <S.QuestionText>{tasks[activeTask].question}</S.QuestionText>
-            
-            {/* {tasks[activeTask].image && (
-              <S.QuestionImage src={tasks[activeTask].image} alt="Writing Task" />
-            )} */}
           </S.QuestionContent>
         </S.QuestionPanel>
 
-        {/* RIGHT PANEL: EDITOR */}
+        {/* RIGHT PANEL */}
         <S.EditorPanel>
           <S.EditorToolbar>
             <S.StatItem>
@@ -116,12 +84,13 @@ const Writing = () => {
             placeholder="Write your answer here..."
             value={activeTask === 1 ? answers.task1 : answers.task2}
             onChange={handleTextChange}
-            spellCheck="false"
+            spellCheck={false}
           />
         </S.EditorPanel>
+
       </S.MainContainer>
 
-      {/* FOOTER: STATUS BAR */}
+      {/* FOOTER */}
       <S.Footer>
         <S.Status>
           Task 1: {wordCount(answers.task1)} words | Task 2: {wordCount(answers.task2)} words
