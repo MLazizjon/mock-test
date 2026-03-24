@@ -1,135 +1,143 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const MainContainer = styled.div`
+  height: 100vh;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f0f2f5;
-  font-family: 'Inter', sans-serif;
-  padding: 15px; /* Kichik ekranlar uchun padding */
-  box-sizing: border-box;
-  width: 100%;
+  justify-content: center;
+  background-image: url(${props => props.bg});
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  font-family: 'Arial', sans-serif;
+  color: white;
+  overflow: hidden;
 `;
 
-export const LoginCard = styled.div`
-  background: #ffffff;
-  padding: 40px 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  
-  /* Eng muhim qismi: */
-  width: 100%;
-  max-width: 400px; /* Kattaroq ekranlarda 400px dan oshmaydi */
-  min-width: 280px; /* Eng kichik ekranlarda ham sig'ishi uchun */
-  
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(13, 17, 39, 0.85); // To'q ko'k filtr
+  z-index: 1;
+`;
+
+export const Header = styled.div`
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 2;
+`;
+
+export const Logo = styled.img`
+  height: 45px;
+`;
+
+export const Content = styled.div`
+  z-index: 2;
   text-align: center;
-  border: 1px solid #e0e0e0;
-  transition: all 0.3s ease;
-
-  /* 350px gacha bo'lgan ekranlar uchun paddingni kamaytiramiz */
-  @media (max-width: 400px) {
-    padding: 30px 20px;
-  }
-
-  /* 1300px dan yuqori ekranlarda biroz kattaroq ko'rinishi mumkin */
-  @media (min-width: 1300px) {
-    max-width: 450px;
-    padding: 50px 45px;
-  }
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
 `;
 
-export const Title = styled.h1`
-  color: #2c3e50;
-  font-size: clamp(22px, 5vw, 28px); /* Shrift o'lchami ekranga qarab o'zgaradi */
+export const WelcomeTitle = styled.h1`
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+`;
+
+export const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+`;
+
+export const RemindText = styled.p`
+  font-size: 14px;
   margin-bottom: 10px;
-  font-weight: 700;
+  span {
+    color: #00ff88;
+    font-weight: bold;
+  }
 `;
 
-export const Subtitle = styled.p`
-  color: #7f8c8d;
-  font-size: clamp(13px, 4vw, 15px);
-  margin-bottom: 30px;
-  line-height: 1.5;
+export const EnterPassText = styled.p`
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 25px;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: clamp(15px, 3vw, 20px);
-  text-align: left;
+  gap: 15px;
 `;
 
-export const FormGroup = styled.div`
+export const InputGroup = styled.div`
+  text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-`;
-
-export const Label = styled.label`
-  font-size: 12px;
-  font-weight: 600;
-  color: #34495e;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-`;
-
-export const Select = styled.select`
-  padding: 12px;
-  border: 1px solid #dcdcdc;
-  border-radius: 8px;
-  font-size: 16px;
-  width: 100%; /* To'liq kenglik */
-  box-sizing: border-box;
-  outline: none;
-  background-color: #fcfcfc;
-  appearance: none;
-  background-image: url("data:image/svg+xml,..."); /* SVG kodingiz */
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 18px;
-
-  &:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  
+  label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 5px;
+    margin-left: 5px;
   }
 `;
 
 export const Input = styled.input`
-  padding: 12px;
-  border: 1px solid #dcdcdc;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 8px;
+  padding: 12px 15px;
+  color: white;
   font-size: 16px;
-  width: 100%; /* To'liq kenglik */
-  box-sizing: border-box;
   outline: none;
-  transition: all 0.3s ease;
 
   &:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    border-color: #00ff88;
   }
 `;
 
-export const SubmitButton = styled.button`
-  background: #3498db;
+export const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+`;
+
+export const BackButton = styled.button`
+  background: transparent;
+  border: 1px solid white;
   color: white;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 8px 30px;
+  border-radius: 6px;
   cursor: pointer;
-  margin-top: 10px;
-  width: 100%;
-  transition: all 0.3s ease;
+  font-size: 14px;
 
   &:hover {
-    background: #217dbb;
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.1);
   }
+`;
 
-  &:active {
-    transform: translateY(0);
+export const EnterButton = styled.button`
+  background: transparent;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  padding: 8px 45px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+
+  &:hover {
+    background: rgba(0, 255, 136, 0.1);
   }
 `;

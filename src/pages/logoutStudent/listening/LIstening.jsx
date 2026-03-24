@@ -117,7 +117,6 @@ const Listening = () => {
   return (
     <S.PageWrapper>
       {/* <ListeningHeader answers={answers} /> */}
-
       <S.MainContainer>
         <S.HeaderSection>
           <S.TitleBlock>

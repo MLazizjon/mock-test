@@ -1,60 +1,75 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './login.styles';
+import logo from './assets/Logo (1).png'; 
+import bgImage from './assets/5eca6921ebb58571fd35a67419b9eadd9146b9aa.jpg'; // Oxirgi yuborgan rasmingiz nomi
 
 const Login = () => {
-  const [role, setRole] = useState('student');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Student logikasi
-    if (role === 'student' && password === '1234') {
-      // LogoutS ichidagi "/" (Home/Section) sahifasiga o'tadi
-      navigate('/student'); 
-    } 
-    // Teacher logikasi
-    else if (role === 'teacher' && password === 'admin') {
-      // LogoutT ichidagi asosiy sahifaga o'tadi
-      navigate('/teacher'); 
-    } 
-    else {
-      alert("Xatolik: Rol yoki parol noto'g'ri!");
+    if (login === 'admin' && password === 'admin') {
+      navigate('/teacher');
+    } else {
+      alert("Login yoki parol xato!");
     }
   };
 
   return (
-    <S.Container>
-      <S.LoginCard>
-        <S.Title>IELTS Mock</S.Title>
-        <S.Subtitle>Tizimga xush kelibsiz</S.Subtitle>
+    <S.MainContainer bg={bgImage}>
+      <S.Overlay /> {/* Rasm ustidagi ko'k qatlam */}
+      
+      <S.Header>
+        <S.Logo src={logo} alt="IELTS CDI MOCK" />
+      </S.Header>
 
-        <S.Form onSubmit={handleLogin}>
-          <S.FormGroup>
-            <S.Label>Foydalanuvchi roli</S.Label>
-            <S.Select value={role} onChange={(e) => setRole(e.target.value)}>
-              <option value="student">Student (Parol: 1234)</option>
-              <option value="teacher">Teacher (Parol: admin)</option>
-            </S.Select>
-          </S.FormGroup>
+      <S.Content>
+        <S.WelcomeTitle>Assalomu Alekum</S.WelcomeTitle>
+        <S.Divider />
+        
+        <S.RemindText>
+          <span>Remind:</span> If you are not an Admin or Teacher, please go back immediately.
+        </S.RemindText>
+        
+        <S.EnterPassText>Enter the Password</S.EnterPassText>
 
-          <S.FormGroup>
-            <S.Label>Parol</S.Label>
+        <S.Form onSubmit={handleSubmit}>
+          <S.InputGroup>
+            <label>Login:</label>
+            <S.Input 
+              type="text" 
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+              required 
+              autoComplete="new-password"
+            />
+          </S.InputGroup>
+
+          <S.InputGroup>
+            <label>Password:</label>
             <S.Input 
               type="password" 
-              placeholder="Parolni kiriting" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
+              required 
+              autoComplete="new-password"
             />
-          </S.FormGroup>
+          </S.InputGroup>
 
-          <S.SubmitButton type="submit">Kirish</S.SubmitButton>
+          <S.ButtonGroup>
+            <S.BackButton type="button" onClick={() => navigate('/')}>
+              ‹ Back
+            </S.BackButton>
+            <S.EnterButton type="submit">
+              Enter
+            </S.EnterButton>
+          </S.ButtonGroup>
         </S.Form>
-      </S.LoginCard>
-    </S.Container>
+      </S.Content>
+    </S.MainContainer>
   );
 };
 
