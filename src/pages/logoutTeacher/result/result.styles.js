@@ -1,47 +1,32 @@
 import styled from 'styled-components';
 
-/* CONTAINER */
 export const Container = styled.div`
-  padding: 40px;
-  background-color: #f1f5f9;
+  padding: clamp(10px, 3vw, 40px);
+  background-color: #f8fafc;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
-
-  @media (max-width: 900px) {
-    padding: 20px;
-  }
+  box-sizing: border-box;
 `;
 
-/* HEADER */
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+  gap: 15px;
+  flex-wrap: wrap;
 
-  h1 {
+  .title-area h1 {
+    font-size: clamp(20px, 4vw, 28px);
     color: #0f172a;
     margin: 0;
-    font-size: 28px;
-
-    @media (max-width: 500px) {
-      font-size: 22px;
-    }
+    font-weight: 800;
   }
 
-  p {
+  .title-area p {
+    font-size: clamp(12px, 1.5vw, 14px);
     color: #64748b;
     margin-top: 5px;
-
-    @media (max-width: 500px) {
-      font-size: 12px;
-    }
-  }
-
-  @media (max-width: 700px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
   }
 `;
 
@@ -51,207 +36,240 @@ export const StatsCard = styled.div`
   border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 15px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  color: #2563eb;
+  gap: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
 
-  span { 
-    display: block; 
-    color: #64748b; 
-    font-size: 12px;
-
-    @media (max-width: 500px) { font-size: 11px; }
+  .icon-wrapper {
+    background: #eff6ff;
+    color: #3b82f6;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
   }
 
-  strong { 
-    font-size: 20px; 
-    color: #1e293b;
-
-    @media (max-width: 500px) { font-size: 16px; }
+  div {
+    display: flex;
+    flex-direction: column;
+    span { font-size: 12px; color: #64748b; }
+    strong { font-size: 18px; color: #1e293b; }
   }
 `;
 
-/* TABLE */
 export const TableCard = styled.div`
   background: white;
   border-radius: 16px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04);
+  overflow-x: auto; 
+  width: 100%;
 `;
 
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
+  min-width: 800px; 
 
-  th, td { padding: 16px 20px; text-align: left; }
+  th, td {
+    padding: 16px 20px;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+  }
 
   th {
     background: #f8fafc;
     color: #64748b;
-    font-size: 13px;
-    font-weight: 600;
     text-transform: uppercase;
-    border-bottom: 1px solid #e2e8f0;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.05em;
   }
 
-  td { border-bottom: 1px solid #f1f5f9; color: #334155; font-size: 14px; }
+  tr:hover { background-color: #f8fafc; }
 
-  .student-name { font-weight: 600; color: #1e293b; display: flex; align-items: center; }
-
-  tr:hover { background: #f8fafc; }
-
-  @media (max-width: 700px) {
-    th, td { padding: 12px 10px; font-size: 12px; }
+  .student-info {
+    font-weight: 600;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
+`;
+
+export const ScoreBadge = styled.div`
+  background: ${props => props.isHigh ? '#dcfce7' : '#fee2e2'};
+  color: ${props => props.isHigh ? '#15803d' : '#b91c1c'};
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 800;
+  display: inline-flex;
+  font-size: 13px;
 `;
 
 export const Badge = styled.span`
-  background: #dbeafe;
-  color: #1e40af;
+  background: #f1f5f9;
+  color: #475569;
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 12px;
-  font-weight: 600;
-
-  @media (max-width: 500px) { font-size: 10px; padding: 3px 6px; }
-`;
-
-export const TimeInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #64748b;
-  font-size: 13px;
-
-  @media (max-width: 500px) { font-size: 11px; gap: 4px; }
-`;
-
-export const StatusBadge = styled.span`
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  background: ${props => props.pending ? '#fef3c7' : '#dcfce7'};
-  color: ${props => props.pending ? '#92400e' : '#166534'};
-
-  @media (max-width: 500px) {
-    font-size: 10px;
-    padding: 3px 6px;
-  }
+  font-weight: 700;
 `;
 
 export const ViewBtn = styled.button`
-  background: #1e293b;
+  background: #3b82f6;
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: 0.2s;
 
-  &:hover { background: #334155; }
-
-  @media (max-width: 500px) {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
+  &:hover { background: #2563eb; transform: translateY(-1px); }
 `;
 
-/* MODAL */
+export const DeleteBtn = styled.button`
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+
+  &:hover { background: #fecaca; color: #dc2626; }
+`;
+
+/* MODAL QISMI */
 export const ModalOverlay = styled.div`
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2000;
+  padding: 20px;
 `;
 
 export const ModalContent = styled.div`
   background: white;
-  width: 90%;
-  max-width: 800px;
-  max-height: 80vh;
-  border-radius: 20px;
-  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 500px) {
-    max-height: 90vh;
-  }
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  overflow: hidden;
 `;
 
 export const ModalHeader = styled.div`
-  padding: 20px;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 20px 30px;
+  border-bottom: 1px solid #f1f5f9;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f8fafc;
+  background: #fff;
 
-  h3 { font-size: 18px; color: #0f172a; }
+  h3 { font-size: 20px; margin: 0; color: #0f172a; font-weight: 800; }
+  span { font-size: 14px; color: #64748b; }
+`;
 
-  @media (max-width: 500px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    h3 { font-size: 16px; }
+export const ModalBody = styled.div`
+  padding: 30px;
+  overflow-y: auto;
+  background: #fafafa;
+
+  h4 { margin-bottom: 15px; color: #1e293b; }
+`;
+
+export const StatItem = styled.div`
+  flex: 1;
+  background: white;
+  padding: 15px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  strong { font-size: 24px; color: ${props => props.color}; }
+  span { font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 700; }
+`;
+
+export const AnswersGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+`;
+
+export const AnswerCard = styled.div`
+  padding: 12px;
+  border-radius: 12px;
+  background: ${props => props.correct ? '#f0fdf4' : '#fef2f2'};
+  border: 1px solid ${props => props.correct ? '#bbf7d0' : '#fecaca'};
+  transition: 0.2s;
+
+  &:hover { transform: scale(1.02); }
+
+  .q-num { 
+    font-size: 11px; 
+    color: #64748b; 
+    font-weight: 800; 
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .u-ans { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    font-size: 15px; 
+    font-weight: 700; 
+    color: ${props => props.correct ? '#15803d' : '#b91c1c'};
+    word-break: break-all;
+  }
+
+  .c-ans { 
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed ${props => props.correct ? '#bbf7d0' : '#fecaca'};
+    font-size: 11px; 
+    color: #15803d; 
+    font-weight: 600;
   }
 `;
 
 export const CloseBtn = styled.button`
-  background: none; border: none; font-size: 24px; cursor: pointer; color: #64748b;
-
-  @media (max-width: 500px) { font-size: 20px; }
-`;
-
-export const ModalBody = styled.div`
-  padding: 25px;
-  overflow-y: auto;
-
-  .answers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-
-    @media (max-width: 700px) {
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
-
-    @media (max-width: 500px) {
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 10px;
-    }
-  }
-`;
-
-export const AnswerItem = styled.div`
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background: #f1f5f9;
-  border-radius: 8px;
+  justify-content: center;
+  font-size: 18px;
+  color: #64748b;
+  transition: 0.2s;
 
-  .q-num { 
-    background: #1e293b; 
-    color: white; 
-    width: 25px; height: 25px; 
-    display: flex; align-items: center; justify-content: center; 
-    border-radius: 50%; 
-    font-size: 12px; 
-
-    @media (max-width: 500px) { width: 20px; height: 20px; font-size: 10px; }
-  }
-
-  .q-ans { font-weight: 600; color: #1e293b; font-size: 13px;
-
-    @media (max-width: 500px) { font-size: 11px; }
-  }
+  &:hover { background: #e2e8f0; color: #0f172a; }
 `;

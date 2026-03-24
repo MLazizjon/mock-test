@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react'; // 1. useCallback qo'shildi
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiClock } from 'react-icons/fi';
+import { FiClock, FiUser, FiCheckCircle } from 'react-icons/fi';
 import { useResults } from '../../provider/Provider';
 import * as S from './Header.styles';
 
 const ListeningHeader = ({ answers, testType = "Listening" }) => {
   const navigate = useNavigate();
-  const { addResult } = useResults();
+  const { addResult, currentUser } = useResults();
   
   const initialSeconds = testType === "Reading" ? 3600 : 1800;
   const [seconds, setSeconds] = useState(initialSeconds);
 
-  // 2. Funksiyani useCallback ichiga olamiz, shunda u har renderda qayta yaratilmaydi
   const handleFinalSubmit = useCallback((isAuto = false) => {
     const confirmText = isAuto 
       ? "Vaqt tugadi! Test avtomatik topshiriladi." 
@@ -20,19 +19,24 @@ const ListeningHeader = ({ answers, testType = "Listening" }) => {
     if (isAuto || window.confirm(confirmText)) {
       const resultData = {
         id: Date.now(),
-        studentName: "Anvar Narzullayev",
+        // LOGIN QILGAN FOYDALANUVCHI ISMI
+        studentName: currentUser ? currentUser.name : "Guest Student",
         testType: testType,
         submittedAt: new Date().toLocaleString(),
-        answers: answers,
-        status: "completed"
+        answers: answers || {},
+        status: "pending"
       };
 
+      // 1. Natijani Providerga (va localStorage ga) saqlash
       addResult(resultData);
-      navigate('/teacher/result');
+      
+      // 2. MUAMMONI YECHIMI: 
+      // Sectionga emas, to'g'ri Natijalar (Result) sahifasiga yuboramiz.
+      // App.js dagi teacher pathiga moslab yozildi:
+      navigate('/teacher/result'); 
     }
-  }, [answers, testType, addResult, navigate]); // Bog'liqliklar (dependencies)
+  }, [answers, testType, addResult, navigate, currentUser]);
 
-  // 3. useEffect endi handleFinalSubmit-ni taniydi va xato bermaydi
   useEffect(() => {
     if (seconds <= 0) {
       handleFinalSubmit(true);
@@ -43,7 +47,7 @@ const ListeningHeader = ({ answers, testType = "Listening" }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [seconds, handleFinalSubmit]); // handleFinalSubmit bu yerga qo'shildi
+  }, [seconds, handleFinalSubmit]);
 
   const formatTime = (totalSeconds) => {
     const minutes = Math.floor(totalSeconds / 60);
@@ -56,7 +60,13 @@ const ListeningHeader = ({ answers, testType = "Listening" }) => {
       <S.HeaderLeft>
         <S.LogoText onClick={() => navigate('/student')}>IELTS Mock</S.LogoText>
         <S.Divider />
-        <S.TestTitle>{testType} Practice Test</S.TestTitle>
+        {/* Ism Headerda ko'rinib turishi uchun */}
+        {currentUser && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#3b82f6', fontWeight: '600' }}>
+            <FiUser />
+            <span>{currentUser.name}</span>
+          </div>
+        )}
       </S.HeaderLeft>
 
       <S.HeaderRight>
@@ -65,6 +75,7 @@ const ListeningHeader = ({ answers, testType = "Listening" }) => {
           <span>{formatTime(seconds)}</span>
         </S.TimerBox>
         <S.SubmitBtn onClick={() => handleFinalSubmit(false)}>
+          <FiCheckCircle style={{ marginRight: '5px' }} />
           Submit {testType}
         </S.SubmitBtn>
       </S.HeaderRight>

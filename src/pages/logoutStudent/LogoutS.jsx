@@ -5,7 +5,7 @@ import Home from './sections/Sectiom';
 import Reading from './reading/Reading';
 import Listening from './listening/LIstening';
 import Writing from './writing/Writing';
-import Speaking from './speaking/Speaking';
+// import Speaking from './speaking/Speaking';
 
 const LogoutS = () => {
   return (
@@ -41,12 +41,12 @@ const LogoutS = () => {
             </>
           } />
           
-          <Route path="/speaking" element={
+          {/* <Route path="/speaking" element={
             <>
               <Header />
               <Speaking />
             </>
-          } />
+          } /> */}
         </Routes>
       </main>
     </div>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useResults } from '../../../provider/Provider';
 import * as S from './listening.styles';
-import { FiPlay, FiPause, FiVolume2 } from 'react-icons/fi';
-// import ListeningHeader from './listening.styles';
+import { FiPlay, FiPause, FiVolume2, FiCheckCircle } from 'react-icons/fi';
 
 // Audio fayllar
 import audio1 from './audio/1.mp3';
@@ -10,6 +11,9 @@ import audio3 from './audio/3.mp3';
 import audio4 from './audio/2.mp3';
 
 const Listening = () => {
+  const navigate = useNavigate();
+  const { addResult, currentUser } = useResults(); // Providerdan ma'lumotlarni olish
+  
   const [activePart, setActivePart] = useState(1);
   const [answers, setAnswers] = useState({});
   const [isPlaying, setIsPlaying] = useState(false);
@@ -112,11 +116,32 @@ const Listening = () => {
     return Object.keys(answers).filter(id => id >= start && id <= end).length;
   };
 
+  // TESTNI TOPSHIRISH FUNKSIYASI (ASOSIY QISM)
+  const handleSubmitTest = () => {
+    const confirmSubmit = window.confirm("Barcha javoblarni topshirmoqchimisiz?");
+    
+    if (confirmSubmit) {
+      // currentUser login sahifasidan kelgan bo'lishi kerak
+      const resultData = {
+        id: Date.now(),
+        // LoginS dagi 'name' va 'phone' ni birlashtiramiz
+        studentName: currentUser ? `${currentUser.name} | ${currentUser.phone}` : "Guest Student",
+        testType: "Listening",
+        submittedAt: new Date().toLocaleString(),
+        answers: answers,
+        status: "pending"
+      };
+      
+      addResult(resultData);
+      alert("Test muvaffaqiyatli qabul qilindi!");
+      navigate('/student'); 
+    }
+  };
+
   const current = partsData[activePart];
 
   return (
     <S.PageWrapper>
-      {/* <ListeningHeader answers={answers} /> */}
       <S.MainContainer>
         <S.HeaderSection>
           <S.TitleBlock>
@@ -129,14 +154,20 @@ const Listening = () => {
             <audio ref={audioRef} onEnded={() => setIsPlaying(false)}>
               <source src={current.audio} type="audio/mpeg" />
             </audio>
-            <S.PlayBtn onClick={() => {
-              if (isPlaying) audioRef.current.pause();
-              else audioRef.current.play();
-              setIsPlaying(!isPlaying);
-            }} active={isPlaying}>
-              {isPlaying ? <FiPause /> : <FiPlay />} 
-              {isPlaying ? "Pause" : `Play Part ${activePart}`}
-            </S.PlayBtn>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <S.PlayBtn onClick={() => {
+                if (isPlaying) audioRef.current.pause();
+                else audioRef.current.play();
+                setIsPlaying(!isPlaying);
+              }} active={isPlaying}>
+                {isPlaying ? <FiPause /> : <FiPlay />} 
+                {isPlaying ? "Pause" : `Play Part ${activePart}`}
+              </S.PlayBtn>
+
+              <S.SubmitAllBtn onClick={handleSubmitTest}>
+                <FiCheckCircle /> Submit All
+              </S.SubmitAllBtn>
+            </div>
             <S.InfoText><FiVolume2 /> Note: Audio plays only once.</S.InfoText>
           </S.AudioBox>
         </S.HeaderSection>
@@ -148,7 +179,7 @@ const Listening = () => {
               <S.QText>
                 {q.type === "MCQ" ? (
                   <>
-                    <p>{q.text}</p>
+                    <p style={{ margin: "0 0 10px 0" }}>{q.text}</p>
                     <S.Options>
                       {q.options.map(opt => (
                         <S.OptionLabel key={opt}>
@@ -184,16 +215,18 @@ const Listening = () => {
       <S.FixedFooter>
         <S.FooterNav>
           {[1, 2, 3, 4].map(pId => (
-            <S.PartTab key={pId} active={activePart === pId}>
-              <div className="tab-main" onClick={() => setActivePart(pId)}>
+            <S.PartTab 
+              key={pId} 
+              active={activePart === pId}
+              onClick={() => setActivePart(pId)}
+            >
+              <div className="tab-main">
                 <span className="title">Part {pId}</span>
-                {activePart !== pId && (
-                  <span className="count">{getAnsweredCount(pId)} of 10</span>
-                )}
+                <span className="count">{getAnsweredCount(pId)} of 10</span>
               </div>
               
               {activePart === pId && (
-                <S.QuestionStrip>
+                <S.QuestionStrip onClick={(e) => e.stopPropagation()}>
                   {Array.from({ length: 10 }, (_, i) => partsData[pId].range[0] + i).map(num => (
                     <S.NavSquare 
                       key={num} 

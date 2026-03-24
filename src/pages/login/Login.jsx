@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './login.styles';
-import logo from './assets/Logo (1).png'; 
-import bgImage from './assets/5eca6921ebb58571fd35a67419b9eadd9146b9aa.jpg'; // Oxirgi yuborgan rasmingiz nomi
+import logo from './assets/photo_2026-03-24_13-09-34-removebg-preview.png'; 
 
 const Login = () => {
   const [login, setLogin] = useState('');
@@ -19,8 +18,8 @@ const Login = () => {
   };
 
   return (
-    <S.MainContainer bg={bgImage}>
-      <S.Overlay /> {/* Rasm ustidagi ko'k qatlam */}
+    <S.MainContainer>
+      <S.Overlay /> 
       
       <S.Header>
         <S.Logo src={logo} alt="IELTS CDI MOCK" />
@@ -36,7 +35,7 @@ const Login = () => {
         
         <S.EnterPassText>Enter the Password</S.EnterPassText>
 
-        <S.Form onSubmit={handleSubmit}>
+        <S.Form onSubmit={handleSubmit} autoComplete="off">
           <S.InputGroup>
             <label>Login:</label>
             <S.Input 
@@ -45,6 +44,7 @@ const Login = () => {
               onChange={(e) => setLogin(e.target.value)}
               required 
               autoComplete="new-password"
+              placeholder="Username"
             />
           </S.InputGroup>
 
@@ -56,6 +56,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required 
               autoComplete="new-password"
+              placeholder="••••••••"
             />
           </S.InputGroup>
 
